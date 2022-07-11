@@ -1,5 +1,20 @@
 let myLibrary = {}
 
+// bugs
+// form does not clear
+// footer gets lost after adding enough books to overflow
+// forms don't have validation checks
+
+// improvements
+// messy flow in script.js
+// footer yet to be added
+// editting still not implemeneted
+// animations not implemented
+
+// features
+// theme picker
+// Read? can become a button instead
+
 // Book class, without ES6 syntactic sugar
 function Book(title, author, pages, read) {
   this.index = Book.prototype.count;
@@ -77,12 +92,20 @@ function toggleAddForm() {
   }
 }
 
+function clearForm() {
+  document.querySelector('#new-title').value = "";
+  document.querySelector('#new-author').value = "";
+  document.querySelector('#new-pages').value = "";
+  document.querySelector('#new-read').checked = false;
+}
+
 function createNewBook(e) {
   e.preventDefault();
   const title = document.querySelector('#new-title').value;
   const author = document.querySelector('#new-author').value;
   const pages = document.querySelector('#new-pages').value;
-  const read = document.querySelector('#new-read').value;
+  const read = document.querySelector('#new-read').checked;
+  console.log(read)
   return new Book(title, author, pages, read);
 }
 
@@ -92,6 +115,7 @@ function submitAddForm(e) {
   myLibrary[newBook.index] = newBook;
   createBookNode(newBook);
   toggleAddForm();
+  clearForm();
 }
 
 addButtonNode.addEventListener('click', toggleAddForm);

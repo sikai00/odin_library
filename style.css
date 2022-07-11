@@ -101,6 +101,12 @@
   width: 90%;
 }
 
+.new-book-form input[id="new-read"] {
+  vertical-align: middle;
+  margin-left: 2px;
+  margin-bottom: 2px;
+}
+
 .new-book-form button[type="submit"] {
   font-family: Nunito;
   color:rgb(143, 75, 75);

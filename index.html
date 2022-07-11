@@ -22,8 +22,11 @@
         <form action="" id="new-book-form" class="new-book-form">
           <input type="text" name="new-title" id="new-title" placeholder="Title">
           <input type="text" name="new-author" id="new-author" placeholder="Author">
-          <input type="text" name="new-pages" id="new-pages" placeholder="Number of pages">
-          <input type="text" name="new-read" id="new-read" placeholder="Read?">
+          <input type="number" name="new-pages" id="new-pages" placeholder="Number of pages">
+          <div class="new-read-wrapper">
+            Read?
+            <input type="checkbox" name="new-read" id="new-read">
+          </div>
           <button type="button" class="cancel">Cancel</button>
           <button type="submit">Add new book</button>
         </form>
