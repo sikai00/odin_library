@@ -14,15 +14,16 @@ let myLibrary = {}
 // theme picker
 // Read? can become a button instead
 class Book {
-  static count = 0;
-
   constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.index = Book.count;
     Book.count++;
   }
+
+  static count = 0;
 
   info() {
     return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readToString()}`
@@ -43,7 +44,7 @@ function createBookNode(book) {
   const newBook = document.createElement('div');
   newBook.className = 'card';
   
-  newBook.dataset.index = Book.count;
+  newBook.dataset.index = book.index;
 
   const newBookTitle = document.createElement('button');
   newBookTitle.className = 'title';
@@ -109,7 +110,7 @@ function createNewBook(e) {
 
 function submitAddForm(e) {
   const newBook = createNewBook(e);
-  myLibrary[Book.count] = newBook;
+  myLibrary[newBook.index] = newBook;
   createBookNode(newBook);
   toggleAddForm();
   clearForm();
