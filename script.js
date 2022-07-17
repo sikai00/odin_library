@@ -1,7 +1,6 @@
 let myLibrary = {}
 
 // bugs
-// form does not clear
 // footer gets lost after adding enough books to overflow
 // forms don't have validation checks
 
@@ -14,28 +13,28 @@ let myLibrary = {}
 // features
 // theme picker
 // Read? can become a button instead
+class Book {
+  static count = 0;
 
-// Book class, without ES6 syntactic sugar
-function Book(title, author, pages, read) {
-  this.index = Book.prototype.count;
-  Book.prototype.count++;
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+    Book.count++;
+  }
 
-Book.prototype.count = 0;
-Book.prototype.info = function() {
-  return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readToString()}`
-}
+  info() {
+    return `${this.title} by ${this.author}, ${this.pages} pages, ${this.readToString()}`
+  }
 
-Book.prototype.readToString = function() {
-  return this.read ? 'read' : 'not read yet';
-}
+  readToString() {
+    return this.read ? 'read' : 'not read yet';
+  }
 
-Book.prototype.pagesToString = function() {
-  return `${this.pages} pages`;
+  pagesToString() {
+    return `${this.pages} pages`;
+  }
 }
 
 
@@ -44,7 +43,7 @@ function createBookNode(book) {
   const newBook = document.createElement('div');
   newBook.className = 'card';
   
-  newBook.dataset.index = book.index;
+  newBook.dataset.index = Book.count;
 
   const newBookTitle = document.createElement('button');
   newBookTitle.className = 'title';
@@ -105,14 +104,12 @@ function createNewBook(e) {
   const author = document.querySelector('#new-author').value;
   const pages = document.querySelector('#new-pages').value;
   const read = document.querySelector('#new-read').checked;
-  console.log(read)
   return new Book(title, author, pages, read);
 }
 
 function submitAddForm(e) {
   const newBook = createNewBook(e);
-  console.log(newBook);
-  myLibrary[newBook.index] = newBook;
+  myLibrary[Book.count] = newBook;
   createBookNode(newBook);
   toggleAddForm();
   clearForm();
